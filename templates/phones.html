@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block titleblock %}
-    <title>Brands</title>
+    <title>Mobile Phones</title>
 {% endblock %}
 
 {% block cssblock %}
@@ -15,32 +15,46 @@
     <section class="container my-2">
         <div class="d-flex my-2 justify-content-end">
             <div class="">
-                <a href="{% url 'mobilephones:add-brand' %}" class="btn btn-primary">Add Brand</a>
+                <a href="{% url 'mobilephones:add-phone' %}" class="btn btn-primary">Add Phone</a>
             </div>
         </div>
-        <table id="example" class="table table-striped text-center" style="width:100%">
+        <table id="example" class="table table-striped" style="width:100%">
             <thead>
             <tr>
                 <th>No</th>
-                <th>Name</th>
+                <th>Image</th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Colors</th>
+                <th>JAN Code</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
             </thead>
             <tbody>
-            {% for brand in brands %}
+            {% for phone in phones %}
                 <tr>
                     <td>{{ forloop.counter }}</td>
-                    <td>{{ brand.name }}</td>
-                    <td><a href="{% url 'mobilephones:edit-brand' id=brand.id %}"><i class="bi bi-pencil-square"></i></a></td>
-                    <td><a href="{% url 'mobilephones:delete-brand' id=brand.id %}" class="text-danger"><i class="bi bi-trash"></i></a></td>
+                    <td><img class="img-fluid" style="width: 80px;" src="{{ phone.image.url }}" alt=""></td>
+                    <td>{{ phone.brand.name }}</td>
+                    <td>{{ phone.model_name }}</td>
+                    <td>{{ phone.colors }}</td>
+                    <td>{{ phone.jan_code }}</td>
+                    <td><a href="{% url 'mobilephones:edit-phone' id=phone.id %}"><i
+                            class="bi bi-pencil-square"></i></a></td>
+                    <td><a href="{% url 'mobilephones:delete-phone' id=phone.id %}" class="text-danger"><i
+                            class="bi bi-trash"></i></a></td>
                 </tr>
             {% endfor %}
             </tbody>
             <tfoot>
             <tr>
                 <th>No</th>
-                <th>Name</th>
+                <th>Image</th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Colors</th>
+                <th>JAN Code</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>

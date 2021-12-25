@@ -5,8 +5,9 @@ from mobilephones import models, forms
 
 # Create your views here.
 def indexView(request):
+    phones = models.Phone.objects.all()
     context = {
-
+        'phones': phones,
     }
     return render(request, 'index.html', context)
 
@@ -19,11 +20,12 @@ def brandsView(request):
     return render(request, 'brands.html', context)
 
 
-def productsView(request):
+def phonesView(request):
+    phones = models.Phone.objects.all()
     context = {
-
+        'phones': phones,
     }
-    return render(request, 'products.html', context)
+    return render(request, 'phones.html', context)
 
 
 def addBrandView(request):
@@ -62,18 +64,36 @@ def deleteBrandView(request, id):
 
 
 def addPhoneView(request):
+    form = forms.PhoneForm
+    if request.method == 'POST':
+        form = forms.PhoneForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('mobilephones:phones'))
     context = {
-        'title': 'Add Phone'
+        'title': 'Add Phone',
+        'form': form,
     }
     return render(request, 'form.html', context)
 
 
 def editPhoneView(request, id):
+    current_phone = models.Phone.objects.get(id=id)
+    form = forms.PhoneForm(instance=current_phone)
+    if request.method == 'POST':
+        form = forms.PhoneForm(data=request.POST, files=request.FILES, instance=current_phone)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('mobilephones:phones'))
+
     context = {
-        'title': 'Edit Phone'
+        'title': 'Edit Phone',
+        'form': form,
     }
     return render(request, 'form.html', context)
 
 
 def deletePhoneView(request, id):
+    current_phone = models.Phone.objects.get(id=id)
+    current_phone.delete()
     return HttpResponseRedirect(request.META['HTTP_REFERER'])

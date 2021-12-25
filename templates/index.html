@@ -13,136 +13,106 @@
 {% block bodyblock %}
     <!-- Search Section -->
     <section class="container">
-        <form method="POST" class="mt-2">
-            <div class="row justify-content-center align-items-end">
+        <form class="mt-2">
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
-                    <input type="search" class="form-control" placeholder="Search (Model Name/JAN Code)">
+                    <input id="searchbar" type="search" class="form-control" placeholder="Search (Model Name/JAN Code)">
                 </div>
-            </div>
         </form>
     </section>
 
     <!-- Product Section -->
     <section class="container">
-        <div class="row gap-md-0 gap-3">
-            <div class="col-12 col-md-3">
-                <div class="card shadow" style="">
-                    <img src="{% static 'images/image.jpg' %}" class="card-img-top" alt="...">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Phone Name</h5>
-                        <h6 class="card-title">Brand Name</h6>
-                        <p class="card-text">COlOR</p>
-                        <p class="card-text">JAN CODE</p>
+        <div class="d-none" id="loading">Loading..........</div>
+        <div class="row" style="gap: 10px 0px;" id="phones">
+            {% for phone in phones %}
+                <div class="col-12 col-md-3">
+                    <div class="card shadow" style="">
+                        <img src="{{ phone.image.url }}" class="card-img-top" alt="...">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{ phone.model_name }}</h5>
+                            <h6 class="card-title">{{ phone.brand.name }}</h6>
+                            <p class="card-text">{{ phone.colors }}</p>
+                            <p class="card-text">{{ phone.jan_code }}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="card shadow" style="">
-                    <img src="{% static 'images/image.jpg' %}" class="card-img-top" alt="...">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Phone Name</h5>
-                        <h6 class="card-title">Brand Name</h6>
-                        <p class="card-text">COlOR</p>
-                        <p class="card-text">JAN CODE</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="card shadow" style="">
-                    <img src="{% static 'images/image.jpg' %}" class="card-img-top" alt="...">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Phone Name</h5>
-                        <h6 class="card-title">Brand Name</h6>
-                        <p class="card-text">COlOR</p>
-                        <p class="card-text">JAN CODE</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="card shadow" style="">
-                    <img src="{% static 'images/image.jpg' %}" class="card-img-top" alt="...">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Phone Name</h5>
-                        <h6 class="card-title">Brand Name</h6>
-                        <p class="card-text">COlOR</p>
-                        <p class="card-text">JAN CODE</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="card shadow" style="">
-                    <img src="{% static 'images/image.jpg' %}" class="card-img-top" alt="...">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Phone Name</h5>
-                        <h6 class="card-title">Brand Name</h6>
-                        <p class="card-text">COlOR</p>
-                        <p class="card-text">JAN CODE</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="card shadow" style="">
-                    <img src="{% static 'images/image.jpg' %}" class="card-img-top" alt="...">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Phone Name</h5>
-                        <h6 class="card-title">Brand Name</h6>
-                        <p class="card-text">COlOR</p>
-                        <p class="card-text">JAN CODE</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="card shadow" style="">
-                    <img src="{% static 'images/image.jpg' %}" class="card-img-top" alt="...">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Phone Name</h5>
-                        <h6 class="card-title">Brand Name</h6>
-                        <p class="card-text">COlOR</p>
-                        <p class="card-text">JAN CODE</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="card shadow" style="">
-                    <img src="{% static 'images/image.jpg' %}" class="card-img-top" alt="...">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Phone Name</h5>
-                        <h6 class="card-title">Brand Name</h6>
-                        <p class="card-text">COlOR</p>
-                        <p class="card-text">JAN CODE</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="card shadow" style="">
-                    <img src="{% static 'images/image.jpg' %}" class="card-img-top" alt="...">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Phone Name</h5>
-                        <h6 class="card-title">Brand Name</h6>
-                        <p class="card-text">COlOR</p>
-                        <p class="card-text">JAN CODE</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="card shadow" style="">
-                    <img src="{% static 'images/image.jpg' %}" class="card-img-top" alt="...">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Phone Name</h5>
-                        <h6 class="card-title">Brand Name</h6>
-                        <p class="card-text">COlOR</p>
-                        <p class="card-text">JAN CODE</p>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </section>
-
-
-
 {% endblock %}
 
 {% block jsblock %}
+    <script>
+        let search = document.getElementById('searchbar');
+        let phones = document.getElementById('phones');
+        let loading = document.getElementById('loading');
 
+        // Ajax Call
+        $('#searchbar').keyup((e) => {
+            phones.innerHTML = '';
+            let searchValue = e.target.value
+            let url = document.location.href
+            $.ajax({
+                url: `${url}api/phone/?search=${searchValue}`,
+                type: "GET",
+                beforeSend: function (){
+                    phones.innerHTML = `<div class=''>Loading.....</div>`
+                },
+                success: function (response) {
+                    console.log(response)
+                    let ele = '';
+                    response.map(e => {
+                        ele += `
+                <div class="col-12 col-md-3">
+                    <div class="card shadow" style="">
+                        <img src="${e.image}" class="card-img-top" alt="...">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">${e.model_name}</h5>
+                            <h6 class="card-title">${e.brand_name}</h6>
+                            <p class="card-text">${e.colors}</p>
+                            <p class="card-text">${e.jan_code}</p>
+                        </div>
+                    </div>
+                </div>
+                `
+                    })
+                    phones.innerHTML = ele;
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    phones.innerHTML = `<div class=''>Loading.....</div>`
+                    console.log(textStatus, errorThrown);
+                }
+            });
+        })
+        // Fetch Call
+        {% comment %}search.addEventListener('keyup', (e) => {
+            phones.innerHTML = '';
+            let searchValue = e.target.value
+            let url = document.location.href
+            loading.classList.remove('d-none');
+            fetch(`${url}api/phone/?search=${searchValue}`)
+            .then(response => response.json())
+            .then(data => {
+                loading.classList.add('d-none');
+                let ele = '';
+                data.map(e => {
+                    ele += `
+                    <div class="col-12 col-md-3">
+                        <div class="card shadow" style="">
+                            <img src="${e.image}" class="card-img-top" alt="...">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">${e.model_name}</h5>
+                                <h6 class="card-title">${e.brand_name}</h6>
+                                <p class="card-text">${e.colors}</p>
+                                <p class="card-text">${e.jan_code}</p>
+                            </div>
+                        </div>
+                    </div>
+                    `
+                })
+                phones.innerHTML = ele;
+            })
+        }){% endcomment %}
+    </script>
 {% endblock %}
