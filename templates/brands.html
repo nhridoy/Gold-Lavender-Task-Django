@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block titleblock %}
+    <title>Brands</title>
+{% endblock %}
+
+{% block cssblock %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+
+{% endblock %}
+
+{% block bodyblock %}
+    <section class="container my-2">
+        <div class="d-flex my-2 justify-content-end">
+            <div class="">
+                <a href="{% url 'mobilephones:add-brand' %}" class="btn btn-primary">Add Brand</a>
+            </div>
+        </div>
+        <table id="example" class="table table-striped text-center" style="width:100%">
+            <thead>
+            <tr>
+                <th>No</th>
+                <th>Name</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for brand in brands %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ brand.name }}</td>
+                    <td><a href="{% url 'mobilephones:edit-brand' id=brand.id %}"><i class="bi bi-pencil-square"></i></a></td>
+                    <td><a href="{% url 'mobilephones:delete-brand' id=brand.id %}" class="text-danger"><i class="bi bi-trash"></i></a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+                <th>No</th>
+                <th>Name</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </tfoot>
+        </table>
+    </section>
+{% endblock %}
+
+{% block jsblock %}
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
+{% endblock %}
