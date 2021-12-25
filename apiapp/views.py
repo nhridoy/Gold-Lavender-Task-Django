@@ -24,7 +24,8 @@ class PhoneApiView(generics.ListAPIView):
     def get(self, request, *args, **kwargs):
         filtered_qs = self.filter_queryset(self.get_queryset())
 
-        serializer = serializers.PhoneSerializer(filtered_qs)
+        serializer = serializers.PhoneSerializer(filtered_qs, data=request.data)
+        print(request.data)
         serializer.is_valid(raise_exception=True)
         if not filtered_qs.exists():
             return Response({'response': 'No Data Found'})
