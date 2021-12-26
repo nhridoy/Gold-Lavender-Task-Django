@@ -4,7 +4,7 @@
 *.pot
 *.pyc
 __pycache__
-media/*
+#media/*
 **/__pycache__/
 
 # Backup files #
@@ -24,7 +24,7 @@ media/*
 .idea/**/gradle.xml
 .idea/**/libraries
 *.iws /out/
-db.sqlite3
+#db.sqlite3
 
 
 # Created by .ignore support plugin (hsz.mobi)

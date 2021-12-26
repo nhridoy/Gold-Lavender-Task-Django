@@ -23,7 +23,13 @@
 
     <!-- Product Section -->
     <section class="container">
-        <div class="d-none" id="loading">Loading..........</div>
+        <div class="d-none" id="loading">
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
         <div class="row" style="gap: 10px 0px;" id="phones">
             {% for phone in phones %}
                 <div class="col-12 col-md-3">
@@ -64,10 +70,16 @@
 </div>`
                 },
                 success: function (response) {
-                    console.log(response)
                     let ele = '';
-                    response.map(e => {
+                    if (response === undefined || response.length == 0) {
                         ele += `
+                        <div class="d-flex justify-content-center">
+    <h2>No Data Found</h2>
+</div>
+                        `
+                    } else {
+                        response.map(e => {
+                            ele += `
                 <div class="col-12 col-md-3">
                     <div class="card shadow" style="">
                         <img src="${e.image}" class="card-img-top" alt="...">
@@ -80,7 +92,8 @@
                     </div>
                 </div>
                 `
-                    })
+                        })
+                    }
                     phones.innerHTML = ele;
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -97,24 +110,32 @@
             loading.classList.remove('d-none');
             fetch(`${url}api/phone/?search=${searchValue}`)
             .then(response => response.json())
-            .then(data => {
+            .then(response => {
                 loading.classList.add('d-none');
                 let ele = '';
-                data.map(e => {
-                    ele += `
-                    <div class="col-12 col-md-3">
-                        <div class="card shadow" style="">
-                            <img src="${e.image}" class="card-img-top" alt="...">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">${e.model_name}</h5>
-                                <h6 class="card-title">${e.brand_name}</h6>
-                                <p class="card-text">${e.colors}</p>
-                                <p class="card-text">${e.jan_code}</p>
-                            </div>
+                if (response === undefined || response.length == 0) {
+                        ele += `
+                        <div class="d-flex justify-content-center">
+    <h2>No Data Found</h2>
+</div>
+                        `
+                    } else {
+                        response.map(e => {
+                            ele += `
+                <div class="col-12 col-md-3">
+                    <div class="card shadow" style="">
+                        <img src="${e.image}" class="card-img-top" alt="...">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">${e.model_name}</h5>
+                            <h6 class="card-title">${e.brand_name}</h6>
+                            <p class="card-text">${e.colors}</p>
+                            <p class="card-text">${e.jan_code}</p>
                         </div>
                     </div>
-                    `
-                })
+                </div>
+                `
+                        })
+                    }
                 phones.innerHTML = ele;
             })
         }){% endcomment %}
