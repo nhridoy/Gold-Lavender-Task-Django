@@ -10,6 +10,10 @@ py -m venv venv
 ```commandline
 venv\Scripts\activate
 ```
+### Install Packages
+```commandline
+pip install -r requirements.txt
+```
 ### Run Project
 ```commandline
 py manage.py runserver
