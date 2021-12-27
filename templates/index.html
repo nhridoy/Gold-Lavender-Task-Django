@@ -70,11 +70,12 @@
 </div>`
                 },
                 success: function (response) {
+
                     let ele = '';
-                    if (response === undefined || response.length == 0) {
+                    if (response.message) {
                         ele += `
                         <div class="d-flex justify-content-center">
-    <h2>No Data Found</h2>
+    <h2>${response.message}</h2>
 </div>
                         `
                     } else {
@@ -113,10 +114,10 @@
             .then(response => {
                 loading.classList.add('d-none');
                 let ele = '';
-                if (response === undefined || response.length == 0) {
+                if (response.message) {
                         ele += `
                         <div class="d-flex justify-content-center">
-    <h2>No Data Found</h2>
+    <h2>${response.message}</h2>
 </div>
                         `
                     } else {
