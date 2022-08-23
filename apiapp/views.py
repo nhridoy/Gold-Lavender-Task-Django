@@ -16,8 +16,10 @@ class PhoneApiView(generics.ListAPIView):
     def get_queryset(self):
         try:
             search = self.request.query_params.get('search')
-            filter_qs = models.Phone.objects.filter(Q(model_name__icontains=search) | Q(jan_code__contains=search))
-            return filter_qs
+            return models.Phone.objects.filter(
+                Q(model_name__icontains=search) | Q(jan_code__contains=search)
+            )
+
         except:
             return models.Phone.objects.all()
 
@@ -25,8 +27,7 @@ class PhoneApiView(generics.ListAPIView):
         data = self.get_serializer(self.get_queryset(), many=True).data
         if len(data) > 0:
             return Response(data, status=status.HTTP_200_OK)
-        else:
-            context = {
-                "message": "No Data Found"
-            }
-            return Response(context, status=status.HTTP_200_OK)
+        context = {
+            "message": "No Data Found"
+        }
+        return Response(context, status=status.HTTP_200_OK)
